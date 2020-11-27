@@ -14,11 +14,11 @@ const App = () => {
       console.log(interval);
       setCount(input);
       interval = setInterval(() => {
-        input--;
         setCount(input);
         if (input <= 0) {
           clearInterval(interval);
         }
+        input--;
       }, 1000);
     }
   };
