@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import "../styles/App.css";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  let input;
-  var interval;
+  // write your code here
+  const [count, setCount] = useState();
+  let value;
+  let interval;
 
-  useEffect(() => {});
-  const handleKeyDown = (el) => {
-    input =
-      parseInt(el.target.value) !== parseInt(el.target.value)
-        ? 0
-        : parseInt(el.target.value);
-
-    if (el.key === "Enter") {
-      setCount(input);
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      clearInterval(interval);
+      value =
+        parseInt(event.target.value) === parseInt(event.target.value)
+          ? parseInt(event.target.value)
+          : 0;
+      setCount(value);
       interval = setInterval(() => {
-        setCount(input);
-        if (input <= 0) {
-          clearInterval(interval);
-        }
-        input--;
+        if (value <= 0) clearInterval(interval);
+        setCount(value--);
       }, 1000);
     }
   };
@@ -30,7 +27,11 @@ const App = () => {
       <div id="whole-center">
         <h1>
           Reverse countdown for
-          <input id="timeCount" onKeyDown={(el) => handleKeyDown(el)} /> sec.
+          <input
+            id="timeCount"
+            onKeyDown={(event) => handleKeyDown(event)}
+          />{" "}
+          sec.
         </h1>
       </div>
       <div id="current-time">{count}</div>
