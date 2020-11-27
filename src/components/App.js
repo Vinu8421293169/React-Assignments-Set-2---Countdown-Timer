@@ -8,10 +8,12 @@ const App = () => {
 
   useEffect(() => {});
   const handleKeyDown = (el) => {
-    input = parseInt(el.target.value) === NaN ? 0 : parseInt(el.target.value);
+    input =
+      parseInt(el.target.value) !== parseInt(el.target.value)
+        ? 0
+        : parseInt(el.target.value);
 
     if (el.key === "Enter") {
-      console.log(interval);
       setCount(input);
       interval = setInterval(() => {
         setCount(input);
