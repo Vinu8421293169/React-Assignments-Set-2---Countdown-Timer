@@ -1,13 +1,12 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/App.css";
 
 const App = () => {
-  // write your code here
   const [count, setCount] = useState();
   let value;
-  let interval;
+  var interval;
 
-  const handleKeyDown = (event) => {
+  function handleKeyDown(event) {
     if (event.key === "Enter") {
       clearInterval(interval);
       value =
@@ -15,12 +14,13 @@ const App = () => {
           ? parseInt(event.target.value)
           : 0;
       setCount(value);
+
       interval = setInterval(() => {
         if (value <= 0) clearInterval(interval);
         setCount(value--);
       }, 1000);
     }
-  };
+  }
 
   return (
     <div className="wrapper">
