@@ -2,11 +2,26 @@ import React, { Component, useState, useEffect } from "react";
 import "../styles/App.css";
 
 const App = () => {
-  const handleKeyDown = (event) => {
+  const [count, setCount] = useState(0);
+  let interval;
+  let value;
+
+  function handleKeyDown(event) {
     if (event.key === "Enter") {
-      console.log("enter");
+      value = 0;
+      clearInterval(interval);
+      value = parseInt(event.target.value);
+
+      interval = setInterval(() => {
+        setCount(value);
+        value -= 1;
+        if (value === 0) {
+          clearInterval(interval);
+        }
+      }, 1000);
     }
-  };
+  }
+
   return (
     <div className="wrapper">
       <div id="whole-center">
@@ -19,7 +34,7 @@ const App = () => {
           sec.
         </h1>
       </div>
-      <div id="current-time">{/* remaining time */}</div>
+      <div id="current-time">{count}</div>
     </div>
   );
 };
