@@ -1,26 +1,28 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/App.css";
 
 const App = () => {
   const [count, setCount] = useState(0);
-  let interval;
-  let value;
 
-  function handleKeyDown(event) {
+  const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      value = 0;
       clearInterval(interval);
-      value = parseInt(event.target.value);
-
-      interval = setInterval(() => {
-        setCount(value);
-        value -= 1;
-        if (value === 0) {
-          clearInterval(interval);
-        }
-      }, 1000);
+      if (isNaN(event.target.value)) {
+        setCount(0);
+        return;
+      }
+      setCount(parseInt(event.target.value));
     }
-  }
+    return;
+  };
+
+  let interval = setInterval(() => {
+    clearInterval(interval);
+    if (count <= 0) {
+      return;
+    }
+    setCount((count) => count - 1);
+  }, 1000);
 
   return (
     <div className="wrapper">
